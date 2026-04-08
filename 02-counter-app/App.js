@@ -4,9 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [count, setCount] = useState(0);
-
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
+  const step = 5
+  const increment = () => setCount(count + step);
+  const decrement = () => setCount(count - step);
   const reset = () => setCount(0);
 
   return (
@@ -15,7 +15,7 @@ export default function App() {
 
       <Text style={styles.title}>Counter App</Text>
 
-      <Text style={styles.count}>{count}</Text>
+      <Text style={[styles.count, { color: count > 1 ? '#2ecc71' : count < 1 ? '#e74c3c' : '#1a1a2e' }]}>{count}</Text>
 
       <View style={styles.buttonRow}>
         <TouchableOpacity style={[styles.button, styles.decrementBtn]} onPress={decrement}>
@@ -26,7 +26,7 @@ export default function App() {
           <Text style={styles.buttonText}>R</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, styles.incrementBtn]} onPress={increment}>
+        <TouchableOpacity style={[styles.button, styles.incrementBtn]} onPress={increment} disabled={count > 10}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
@@ -35,7 +35,7 @@ export default function App() {
         {count === 0 ? 'Start counting!' : count > 0 ? 'Going up!' : 'Going negative!'}
       </Text>
 
-    </View>
+    </View> 
   );
 }
 
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
   count: {
     fontSize: 96,
     fontWeight: 'bold',
-    color: '#1a1a2e',
     width: 200,
     textAlign: 'center',
   },
