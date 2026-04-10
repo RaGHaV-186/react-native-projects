@@ -5,20 +5,23 @@
 ├── 01-hello-world-rn/
 ├── 02-counter-app/
 ├── 03-todo-list/
+├── 04-hello-api/
 └── CLAUDE.md  ← you are here
 
 ## Stack
 - React Native + Expo (blank template)
 - Python 3 + Django + Django REST Framework
-- PostgreSQL (from P4 onwards)
+- PostgreSQL (from P9 onwards)
 - Redis (from P21 onwards)
+- JWT auth with djangorestframework-simplejwt (from P9)
+- Django Channels + WebSockets (from P18)
 - Git monorepo on GitHub: github.com/RaGHaV-186/react-native-projects
 
 ## Progress tracker
 - [x] P01 — Hello World RN (View, Text, Image, StyleSheet)
 - [x] P02 — Counter App (useState, TouchableOpacity)
 - [x] P03 — To-Do List (FlatList, array state patterns, TextInput)
-- [ ] P04 — Django Hello API
+- [x] P04 — Django Hello API (Django setup, DRF, @api_view, URL routing, URL params)
 - [ ] P05 — Quote of the Day (first full-stack)
 - [ ] P06 — BMI Calculator
 - [ ] P07 — Note Saver (full CRUD)
@@ -52,6 +55,7 @@
 - [ ] P35 — Production Deploy
 
 ## Concepts learned so far
+
 ### React Native
 - Core components: View, Text, Image, TextInput, TouchableOpacity, FlatList
 - useState — single values, arrays, objects
@@ -59,6 +63,18 @@
 - Controlled inputs
 - Array state patterns: spread (add), map (update), filter (delete)
 - Conditional styling with style arrays
+
+### Django + DRF
+- Project vs app distinction (django-admin startproject vs startapp)
+- INSTALLED_APPS — registering apps and third-party packages
+- URL routing: root urls.py → app urls.py → view function
+- @api_view decorator — handling HTTP methods, returning JSON
+- DRF Response — auto-serializes Python dicts to JSON
+- URL parameters: <str:name>, <int:id>
+- Query params: request.query_params.get('key', 'default')
+- manage.py commands: migrate, runserver
+- Virtual environments with venv
+- .gitignore for Django (venv/, __pycache__/, db.sqlite3, .env)
 
 ### Git
 - git init, add, commit, push
@@ -79,5 +95,15 @@ feat(0X): short description of what was built
 
 ## Important notes
 - Always rm -rf .git inside new Expo projects before adding to monorepo
-- Django projects will live in a separate folder inside this repo from P4 onwards
+- Django projects live in their own numbered folder inside this repo
 - Each project folder has its own README.md documenting what was learned
+- Virtual environment (venv/) lives inside the Django project folder, never committed
+- From P9: switch from SQLite to PostgreSQL
+- From P18: add Redis + Django Channels
+- System design moment in every backend project — before coding (design) + after coding (what breaks at 1M users)
+
+## Database learning path
+- P04–P08: Django models, migrations, SQLite, basic ORM
+- P09–P17: Relationships (FK, M2M, O2O), aggregations, indexes
+- P18–P26: Query optimization, Redis cache, EXPLAIN ANALYZE
+- P27–P35: Transactions, select_for_update, connection pooling
