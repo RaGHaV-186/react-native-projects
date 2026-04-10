@@ -1,0 +1,29 @@
+# Project 04 — Django Hello API
+
+## What I learned
+- How to set up a Django project and app
+- How Django REST Framework works
+- URL routing: root urls.py → app urls.py
+- Writing a view with @api_view decorator
+- URL parameters with <str:name>
+
+## Tech used
+- Python 3.x
+- Django 4.x
+- Django REST Framework
+
+## Architecture
+Request → Django URL router (helloapi/urls.py)
+       → App URL router (api/urls.py)
+       → View function (api/views.py)
+       → DRF Response → JSON
+
+## Endpoints
+GET /api/hello/          → {"message": "Hello from Django!"}
+GET /api/greet/<name>/   → {"message": "Hello, <name>!"}
+
+## What breaks at 1M users
+- runserver is single-threaded → need Gunicorn + Nginx
+- SQLite can't handle concurrent writes → PostgreSQL
+- No caching → Redis
+- No rate limiting → API gateway
