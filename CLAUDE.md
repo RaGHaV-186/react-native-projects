@@ -6,10 +6,13 @@
 ├── 02-counter-app/
 ├── 03-todo-list/
 ├── 04-hello-api/
+├── 05-quote-of-the-day/
+│   ├── backend/      ← Django
+│   └── frontend/     ← React Native (Expo Router)
 └── CLAUDE.md  ← you are here
 
 ## Stack
-- React Native + Expo (blank template)
+- React Native + Expo (Expo Router — file-based navigation)
 - Python 3 + Django + Django REST Framework
 - PostgreSQL (from P9 onwards)
 - Redis (from P21 onwards)
@@ -22,7 +25,7 @@
 - [x] P02 — Counter App (useState, TouchableOpacity)
 - [x] P03 — To-Do List (FlatList, array state patterns, TextInput)
 - [x] P04 — Django Hello API (Django setup, DRF, @api_view, URL routing, URL params)
-- [ ] P05 — Quote of the Day (first full-stack)
+- [x] P05 — Quote of the Day (first full-stack, Django model, serializer, ORM, useEffect, fetch)
 - [ ] P06 — BMI Calculator
 - [ ] P07 — Note Saver (full CRUD)
 - [ ] P08 — Multi-screen Navigation
@@ -63,6 +66,12 @@
 - Controlled inputs
 - Array state patterns: spread (add), map (update), filter (delete)
 - Conditional styling with style arrays
+- useEffect — running code on mount with empty dependency array []
+- async/await fetch pattern — calling REST APIs from RN
+- try/catch/finally — error handling for network calls
+- ActivityIndicator — built-in loading spinner
+- Expo Router — file-based routing, app/ folder structure
+- Conditional rendering with ternary (loading ? spinner : content)
 
 ### Django + DRF
 - Project vs app distinction (django-admin startproject vs startapp)
@@ -72,16 +81,22 @@
 - DRF Response — auto-serializes Python dicts to JSON
 - URL parameters: <str:name>, <int:id>
 - Query params: request.query_params.get('key', 'default')
-- manage.py commands: migrate, runserver
+- manage.py commands: makemigrations, migrate, runserver, createsuperuser
 - Virtual environments with venv
-- .gitignore for Django (venv/, __pycache__/, db.sqlite3, .env)
+- Django models — TextField, CharField, __str__
+- Migrations — makemigrations generates SQL, migrate runs it
+- Django Admin — registering models, adding data via UI
+- ORM basics — Quote.objects.all(), random.choice()
+- ModelSerializer — translates Python model instances to JSON
+- runserver 0.0.0.0:8000 — expose server to local network (phone access)
 
 ### Git
 - git init, add, commit, push
 - Single monorepo structure
 - feat(0X): commit convention
 - rm -rf .git after create-expo-app
-- .gitignore
+- .gitignore — must exclude venv/ to avoid committing thousands of files
+- git rm -r --cached — stop tracking files already committed
 
 ## Git commit convention
 feat(0X): short description of what was built
@@ -98,6 +113,10 @@ feat(0X): short description of what was built
 - Django projects live in their own numbered folder inside this repo
 - Each project folder has its own README.md documenting what was learned
 - Virtual environment (venv/) lives inside the Django project folder, never committed
+- Always add .gitignore BEFORE first commit to avoid committing venv/
+- Expo Router is the default in new Expo projects — main screen is app/(tabs)/index.tsx not App.js
+- To expose Django to phone on same WiFi: runserver 0.0.0.0:8000
+- Phone cannot use localhost — always use Mac's local IP (ipconfig getifaddr en0)
 - From P9: switch from SQLite to PostgreSQL
 - From P18: add Redis + Django Channels
 - System design moment in every backend project — before coding (design) + after coding (what breaks at 1M users)
